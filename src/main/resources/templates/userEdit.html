@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cash Register</title>
+</head>
+<body>
+<h2 th:text="#{userEditor}"></h2>
+<form th:action="@{/user}" method="post">
+    <label>
+        <input type="text" name="username" th:value="${user.username}">
+    </label>
+    <tr th:each="role : ${roles}">
+        <div>
+            <label><input type="checkbox" th:name="${role}" th:checked="${user.roles.contains(role)} ? 'checked'"
+                          th:text="${role}"></label>
+        </div>
+    </tr>
+    <input type="hidden" th:value="${user.id}" name="userId">
+    <button type="submit" th:text="#{save}"></button>
+</form>
+<div>
+    <a th:href="@{'?locale=ua'}">UA</a>
+    <a th:href="@{'?locale=en'}">EN</a>
+</div>
+</body>
+</html>

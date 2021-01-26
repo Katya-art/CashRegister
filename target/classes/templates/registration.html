@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cash Register</title>
+</head>
+
+<body>
+<h2 th:text="#{registrationPage}"></h2>
+<div th:if="${message}">
+    <p th:text="#{userExist}"></p>
+</div>
+<form th:action="@{/registration}" method="post">
+    <div th:text="#{userName}"></div>
+    <div><label><input type="text" name="username"/> </label></div>
+    <div th:text="#{password}"></div>
+    <div><label><input type="password" name="password"/> </label></div>
+    <div><input type="submit" th:value="#{register}"/></div>
+</form>
+<div>
+    <a th:href="@{'?locale=ua'}">UA</a>
+    <a th:href="@{'?locale=en'}">EN</a>
+</div>
+</body>
+</html>
