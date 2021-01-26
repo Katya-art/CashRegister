@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Cash Register</title>
@@ -9,9 +10,13 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" th:value="#{singOut}"/>
     </form>
-    <span><a href="/user" th:text="#{userList}"></a></span>
 </div>
-<a href="/registration" th:text="#{addNewUser}"></a>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <a href="/user" th:text="#{userList}"></a>
+</div>
+<div sec:authorize="hasAuthority('ADMIN')">
+    <a href="/registration" th:text="#{addNewUser}"></a>
+</div>
 <div>
     <a th:href="@{'?locale=ua'}">UA</a>
     <a th:href="@{'?locale=en'}">EN</a>
