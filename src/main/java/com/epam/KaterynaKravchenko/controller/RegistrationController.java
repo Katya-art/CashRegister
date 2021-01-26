@@ -1,6 +1,5 @@
 package com.epam.KaterynaKravchenko.controller;
 
-import com.epam.KaterynaKravchenko.domain.Role;
 import com.epam.KaterynaKravchenko.domain.User;
 import com.epam.KaterynaKravchenko.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.Collections;
 
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
@@ -31,10 +28,9 @@ public class RegistrationController {
             model.addAttribute("message", "User exists!");
             return "registration";
         }
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
+        //user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
 
-        return "redirect:/login";
+        return "redirect:/main";
     }
 }
