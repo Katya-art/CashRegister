@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cash Register</title>
+</head>
+<body>
+<h2 th:text="#{productList}"></h2>
+<table>
+    <thead>
+    <tr>
+        <th th:text="#{code}"></th>
+        <th th:text="#{nameEN}"></th>
+        <th th:text="#{nameUA}"></th>
+        <th th:text="#{quantity}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.code}"></td>
+        <td th:text="${product.nameEN}"></td>
+        <td th:text="${product.nameUA}"></td>
+        <td th:text="${product.quantity}"></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <a th:href="@{'?locale=ua'}">UA</a>
+    <a th:href="@{'?locale=en'}">EN</a>
+</div>
+</body>
+</html>

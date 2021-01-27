@@ -17,6 +17,12 @@
 <div sec:authorize="hasAuthority('ADMIN')">
     <a href="/registration" th:text="#{addNewUser}"></a>
 </div>
+<div sec:authorize="hasAuthority('MERCHANDISER')">
+    <a href="/addProducts" th:text="#{addProducts}"></a>
+</div>
+<div sec:authorize="hasAuthority('MERCHANDISER')">
+    <a href="/productList" th:text="#{productList}"></a>
+</div>
 <div>
     <a th:href="@{'?locale=ua'}">UA</a>
     <a th:href="@{'?locale=en'}">EN</a>

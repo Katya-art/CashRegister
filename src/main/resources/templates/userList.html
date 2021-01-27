@@ -19,7 +19,6 @@
         <td th:text="${user.username}"></td>
         <td th:each="role : ${user.roles}" th:text="${role}"></td>
         <td><a th:href="@{/user/{id}(id=${user.id})}" th:text="#{edit}"></a></td>
-
     </tr>
     </tbody>
 </table>
