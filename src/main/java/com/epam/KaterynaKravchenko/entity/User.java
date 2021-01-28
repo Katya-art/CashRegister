@@ -1,4 +1,4 @@
-package com.epam.KaterynaKravchenko.domain;
+package com.epam.KaterynaKravchenko.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
 package com.epam.KaterynaKravchenko.controller;
 
-import com.epam.KaterynaKravchenko.domain.User;
+import com.epam.KaterynaKravchenko.entity.User;
 import com.epam.KaterynaKravchenko.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

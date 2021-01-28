@@ -1,4 +1,4 @@
-package com.epam.KaterynaKravchenko.domain;
+package com.epam.KaterynaKravchenko.entity;
 
 import javax.persistence.*;
 

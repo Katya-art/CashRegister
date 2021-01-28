@@ -1,6 +1,6 @@
 package com.epam.KaterynaKravchenko.repos;
 
-import com.epam.KaterynaKravchenko.domain.Message;
+import com.epam.KaterynaKravchenko.entity.Message;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
