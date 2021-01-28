@@ -5,27 +5,41 @@
     <title>Cash Register</title>
 </head>
 <body>
+<a href="/main" th:text="#{mainPage}">Main page</a>
 <h2 th:text="#{productInfo}"></h2>
 <form th:action="@{/addProducts}" method="post">
-    <div th:if="${message1}">
-        <p th:text="#{productExist}"></p>
-    </div>
     <div th:text="#{nameEN}"></div>
     <div><label><input type="text" name="nameEN"/> </label></div>
-    <div th:if="${message2}">
-        <p th:text="#{productExist}"></p>
-    </div>
     <div th:text="#{nameUA}"></div>
     <div><label><input type="text" name="nameUA"/> </label></div>
-    <div th:if="${message3}">
-        <p th:text="#{productExist}"></p>
-    </div>
     <div th:text="#{code}"></div>
     <div><label><input type="text" name="code"/> </label></div>
     <div th:text="#{quantity}"></div>
     <div><label><input type="number" name="quantity"/> </label></div>
     <div><input type="submit" th:value="#{add}"/></div>
 </form>
+<div th:if="${message}">
+    <a th:text="#{productExist}"></a>
+    <a href="/productList" th:text="#{wantToChange}"></a>
+    <table>
+        <thead>
+        <tr>
+            <th th:text="#{code}"></th>
+            <th th:text="#{nameEN}"></th>
+            <th th:text="#{nameUA}"></th>
+            <th th:text="#{quantity}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${product.code}"></td>
+            <td th:text="${product.nameEN}"></td>
+            <td th:text="${product.nameUA}"></td>
+            <td th:text="${product.quantity}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <div>
     <a th:href="@{'?locale=ua'}">UA</a>
     <a th:href="@{'?locale=en'}">EN</a>

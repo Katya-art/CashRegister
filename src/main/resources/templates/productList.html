@@ -5,6 +5,7 @@
     <title>Cash Register</title>
 </head>
 <body>
+<a href="/main" th:text="#{mainPage}">Main page</a>
 <h2 th:text="#{productList}"></h2>
 <table>
     <thead>
@@ -13,6 +14,7 @@
         <th th:text="#{nameEN}"></th>
         <th th:text="#{nameUA}"></th>
         <th th:text="#{quantity}"></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +23,7 @@
         <td th:text="${product.nameEN}"></td>
         <td th:text="${product.nameUA}"></td>
         <td th:text="${product.quantity}"></td>
+        <td><a th:href="@{/product/{id}(id=${product.id})}" th:text="#{edit}"></a></td>
     </tr>
     </tbody>
 </table>

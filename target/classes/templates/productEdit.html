@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cash Register</title>
+</head>
+<body>
+<h2 th:text="#{productEditor}"></h2>
+<form th:action="@{/productList}" method="post">
+    <div th:text="#{newQuantity}"></div>
+    <label>
+        <input type="number" name="quantity" th:value="${product.quantity}">
+    </label>
+    <input type="hidden" th:value="${product.id}" name="productId">
+    <button type="submit" th:text="#{save}"></button>
+</form>
+</body>
+</html>
