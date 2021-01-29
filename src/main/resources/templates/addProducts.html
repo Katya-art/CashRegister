@@ -12,10 +12,10 @@
     <div><label><input type="text" name="nameEN"/> </label></div>
     <div th:text="#{nameUA}"></div>
     <div><label><input type="text" name="nameUA"/> </label></div>
-    <div th:text="#{code}"></div>
-    <div><label><input type="text" name="code"/> </label></div>
     <div th:text="#{quantity}"></div>
     <div><label><input type="number" name="quantity"/> </label></div>
+    <div th:text="#{price}"></div>
+    <div><label><input type="number" name="price"/> </label></div>
     <div><input type="submit" th:value="#{add}"/></div>
 </form>
 <div th:if="${message}">
@@ -24,18 +24,20 @@
     <table>
         <thead>
         <tr>
-            <th th:text="#{code}"></th>
+            <th th:text="#{id}"></th>
             <th th:text="#{nameEN}"></th>
             <th th:text="#{nameUA}"></th>
             <th th:text="#{quantity}"></th>
+            <th th:text="#{price}"></th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td th:text="${product.code}"></td>
+            <td th:text="${product.id}"></td>
             <td th:text="${product.nameEN}"></td>
             <td th:text="${product.nameUA}"></td>
             <td th:text="${product.quantity}"></td>
+            <td th:text="${product.price}"></td>
         </tr>
         </tbody>
     </table>
