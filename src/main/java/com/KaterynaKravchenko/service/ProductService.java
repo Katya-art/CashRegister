@@ -11,20 +11,25 @@ public class ProductService {
     private ProductRepo productRepo;
 
     public boolean addProduct(Product product) {
-        Product productFromDB = findProduct(product.getNameEN(), product.getNameUA(), product.getId());
-        if (productFromDB != null) {
+        if (findProduct(product) != null) {
             return false;
         }
         productRepo.save(product);
         return true;
     }
 
-    public Product findProduct(String nameEN, String nameUA, Long id) {
-        return productRepo.findByNameENOrNameUAOrId(nameEN, nameUA, id);
+    public Product findProduct(Product product) {
+        return productRepo.findByNameENOrNameUAOrId(product.getNameEN(), product.getNameUA(), product.getId());
     }
 
-    public Iterable<Product> findAllProducts(){
+    public Iterable<Product> findAllProducts() {
         return productRepo.findAll();
+    }
+
+    public boolean saveProduct(Product product, Long quantity) {
+        product.setQuantity(quantity);
+        productRepo.save(product);
+        return true;
     }
 
 }

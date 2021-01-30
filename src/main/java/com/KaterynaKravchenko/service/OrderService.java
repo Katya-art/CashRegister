@@ -1,7 +1,10 @@
 package com.KaterynaKravchenko.service;
 
+import com.KaterynaKravchenko.entity.Order;
 import com.KaterynaKravchenko.entity.Product;
 import com.KaterynaKravchenko.entity.OrderDetails;
+import com.KaterynaKravchenko.repos.OrderRepo;
+import com.KaterynaKravchenko.repos.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +13,12 @@ import java.util.Set;
 
 @Service
 public class OrderService {
-    @Autowired
-    private OrderService orderService;
 
     @Autowired
-    private ProductService productService;
+    private OrderRepo orderRepo;
+
+    @Autowired
+    private ProductRepo productRepo;
 
     private Set<OrderDetails> orderDetails = new HashSet<>();
 
@@ -27,7 +31,7 @@ public class OrderService {
     }
 
     public boolean addToOrder(String nameEN, String nameUA, Long id, Long quantity) {
-        Product productFromBD = productService.findProduct(nameEN, nameUA, id);
+        Product productFromBD = productRepo.findByNameENOrNameUAOrId(nameEN, nameUA, id);
         if (productFromBD == null) {
             return false;
         }
@@ -35,6 +39,13 @@ public class OrderService {
         newOrder.setProductId(productFromBD.getId());
         newOrder.setQuantity(quantity);
         orderDetails.add(newOrder);
+        return true;
+    }
+
+    public boolean saveOrder(Order order) {
+        order.setOrderDetails(getOrderDetails());
+        orderRepo.save(order);
+        setOrderDetails(new HashSet<>());
         return true;
     }
 }

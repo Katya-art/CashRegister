@@ -1,7 +1,6 @@
 package com.KaterynaKravchenko.controller;
 
 import com.KaterynaKravchenko.entity.Order;
-import com.KaterynaKravchenko.repos.OrderRepo;
 import com.KaterynaKravchenko.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,16 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.HashSet;
-
 @Controller
 @PreAuthorize("hasAuthority('CASHIER')")
 public class OrderController {
     @Autowired
     private OrderService orderService;
-
-    @Autowired
-    private OrderRepo orderRepo;
 
     @GetMapping("/createOrder")
     public String newOrder() {
@@ -46,9 +40,7 @@ public class OrderController {
             return "createOrder";
         }
         if (action.equals("save")) {
-            order.setOrderDetails(orderService.getOrderDetails());
-            orderRepo.save(order);
-            orderService.setOrderDetails(new HashSet<>());
+            orderService.saveOrder(order);
             return "redirect:/main";
         }
         return "createOrder";
