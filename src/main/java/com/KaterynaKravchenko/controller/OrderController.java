@@ -32,11 +32,8 @@ public class OrderController {
             Order order
     ) {
         if (action.equals("add")) {
-            if (!orderService.addToOrder(nameEN, nameUA, id, quantity)) {
-                model.addAttribute("message", "Product not founded");
-                return "createOrder";
-            }
-            model.addAttribute("products", orderService.getOrderDetails());
+            model.addAttribute("message", orderService.addToOrder(nameEN, nameUA, id, quantity));
+            model.addAttribute("products", orderService.getOrderProducts());
             return "createOrder";
         }
         if (action.equals("save")) {
@@ -44,5 +41,11 @@ public class OrderController {
             return "redirect:/main";
         }
         return "createOrder";
+    }
+
+    @GetMapping("/orderList")
+    public String orderList(Model model) {
+        model.addAttribute("orders", orderService.findAllOrders());
+        return "orderList";
     }
 }

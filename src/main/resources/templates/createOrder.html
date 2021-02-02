@@ -25,7 +25,7 @@
     <div><input type="submit" name="action" value="save"/></div>
 </form>
 <h2 th:text="#{orderDetails}"></h2>
-<div th:if="${message}"></div>
+<div th:if="${message}" th:text="${message}"></div>
 <table th:if="${products}">
     <thead>
     <tr>

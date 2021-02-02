@@ -20,32 +20,52 @@ public class OrderService {
     @Autowired
     private ProductRepo productRepo;
 
-    private Set<OrderDetails> orderDetails = new HashSet<>();
+    private Set<OrderDetails> orderProducts = new HashSet<>();
+    private long orderPrice = 0;
 
-    public Set<OrderDetails> getOrderDetails() {
-        return orderDetails;
+    public Set<OrderDetails> getOrderProducts() {
+        return orderProducts;
     }
 
-    public void setOrderDetails(Set<OrderDetails> orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setOrderProducts(Set<OrderDetails> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
-    public boolean addToOrder(String nameEN, String nameUA, Long id, Long quantity) {
+    public long getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(long orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
+    public String addToOrder(String nameEN, String nameUA, Long id, Long quantity) {
         Product productFromBD = productRepo.findByNameENOrNameUAOrId(nameEN, nameUA, id);
         if (productFromBD == null) {
-            return false;
+            return "Can't found such product";
+        }
+        if (productFromBD.getQuantity() < quantity) {
+            return "This product is not in the given quality";
         }
         OrderDetails newOrder = new OrderDetails();
         newOrder.setProductId(productFromBD.getId());
         newOrder.setQuantity(quantity);
-        orderDetails.add(newOrder);
-        return true;
+        orderProducts.add(newOrder);
+        setOrderPrice(getOrderPrice() + productFromBD.getPrice() * quantity);
+        productFromBD.setQuantity(productFromBD.getQuantity() - quantity);
+        productRepo.save(productFromBD);
+        return "Product was successfully added to order";
     }
 
     public boolean saveOrder(Order order) {
-        order.setOrderDetails(getOrderDetails());
+        order.setOrderDetails(getOrderProducts());
+        order.setTotalPrice(getOrderPrice());
         orderRepo.save(order);
-        setOrderDetails(new HashSet<>());
+        setOrderProducts(new HashSet<>());
         return true;
+    }
+
+    public Iterable<Order> findAllOrders() {
+        return orderRepo.findAll();
     }
 }
