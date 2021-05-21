@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" xmlns:th="http://www.w3.org/1999/xhtml"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <a class="navbar-brand" href="/">Cash Register</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                <a class="nav-link" href="/user" th:text="#{userList}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                <a class="nav-link" href="/registration" th:text="#{addNewUser}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('MERCHANDISER')">
+                <a class="nav-link" href="/addProducts" th:text="#{addProducts}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('MERCHANDISER')">
+                <a class="nav-link" href="/productList" th:text="#{productList}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('CASHIER')">
+                <a class="nav-link" href="/createOrder" th:text="#{createNewOrder}"></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('CASHIER')">
+                <a class="nav-link" href="/orderList" th:text="#{orderList}"></a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" sec:authorize="isAnonymous()">
+                <a class="nav-link" href="/main" th:text="#{login}"></a>
+            </li>
+            <form th:action="@{/logout}" method="post" sec:authorize="isFullyAuthenticated()">
+                <button class="btn btn-primary" type="submit" th:text="#{singOut}"></button>
+            </form>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'?locale=ua'}">UA</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'?locale=en'}">EN</a>
+            </li>
+        </ul>
+    </div>
+</nav>

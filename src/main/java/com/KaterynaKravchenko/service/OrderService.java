@@ -62,6 +62,7 @@ public class OrderService {
         order.setTotalPrice(getOrderPrice());
         orderRepo.save(order);
         setOrderProducts(new HashSet<>());
+        setOrderPrice(0);
         return true;
     }
 
